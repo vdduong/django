@@ -19,3 +19,6 @@ print "</ul>"
 print "</body></html>"
 
 connection.close()
+
+# to connect our Python code to q server thqt will respond to nqvigqtors's resquests
+# we employ the CGI norm that allows the program to return web pages.
