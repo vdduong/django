@@ -5,6 +5,7 @@
 # et un gabarit html (derniers_livres.html)
 
 # models.py
+# décrit la table pour stocker les données sous la forme d'une classe Python
 
 from django.db import models
 
@@ -13,6 +14,7 @@ class Livre(models.Model):
   date_publication = models.DateField()
 
 # views.py
+# contient la logique de la page, sous la forme de la fonction Python derniers_livres
 
 from django.shortcuts import render_to_response
 from models import Livre
@@ -22,6 +24,8 @@ def derniers_livres(request):
   return render_to_response('derniers_livres.html', {'liste_livres': liste_livres})
 
 # urls.py (la configuration de l'URL)
+# définit quelle vue sera appelé pour un modèle d'URL donné.
+# dans notre cas, derniers/ sera traité par la fonction derniers_livres
 
 from django.conf.urls.defaults import *
 
