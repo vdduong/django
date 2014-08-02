@@ -38,3 +38,17 @@ urlpatterns = patterns('',(r'derniers/$', app.views.derniers_livres),)
     <li>{{ livre.nom }}</li>
   {% endfor %}
 </ul>
+
+# l'installation du framework requiert programmes qui seront indispensables à son fonctionnement
+# Python, Python Imaging Library, gestionnaire de base(s) de données (MySQL, SQLite, PostgreSQL..)
+# denière version de Django
+
+import django
+print django.VERSION
+
+import Image
+print Image.VERSION
+
+from pysqlite2 import dbapi2
+print dbapi2.version
+
