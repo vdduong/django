@@ -189,16 +189,87 @@ python manage.py collectstatic
 {% endblock %}
 
 
+# 11/21 django messages and messagin framework
+// views.py
+from django.contrib import messages
 
+from .forms import SignUpForm
 
-
-
-
-
+def home(request):
+  form = SignUpForm(request.POST or None)
   
+  if form.is_valid():
+    save_it = form.save(commit=False)
+    save_it.save()
+    messages.success(request, 'Thank you for joining')
+    
+  return render_to_response('signup.html', locals(), context_instance=RequestContext(request))
 
-  
+// base.html
+<div class='container'>
+{% if messages %}
+  <div class='row'>
+  {% for message in messages %}
+  <p{% if message.tags %} class='{{message.tags}}'{%endif %}> {{message}} </p>
+  {% endfor % }
+  </div>
+</div>
 
+// 12/21: Django HTTP redirect and standard pages
+// views.py
+from django.shortcuts import render, render_to_response, RequestContext, HttpResponseRedirect
+from django.contrib import messages
+
+from .forms import SignUpForm
+
+def home(request):
+  form = SignUpForm(request.POST or None)
   
+  if form.is_valid():
+    save_it = form.save(commit=False)
+    save_it.save()
+    messages.success(request, 'Thank you for joining')
+    return HttpResponseRedirect('/thank-you/', 'signups.views.thankyou', name='thankyou')
+  return render_to_response('signup.html', locals(), context_instance=RequestContext(request))
+
+// urls.py
+url(r'^thank-you/$',)
+
+// views.py
+def thankyou(request):
+  return render_to_response('thankyou.html', locals(), context_instance=RequestContext(request))
   
+// thankyou.html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h4> Thank you for joining </h4>
+
+{% endblock %}
+
+// 13/21 add & update twitter bootstrap navbar
+
+// 14/21 add basic paypal button to Django project template
+
+// 15/21 django update thank you page and view after paypal purchase
+
+// django emailing send a confirmation email using gmail
+
+// django 1.6 for Webfaction - setup Webfaction accounts to go live
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
